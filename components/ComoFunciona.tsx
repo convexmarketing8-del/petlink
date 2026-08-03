@@ -37,7 +37,7 @@ export default function ComoFunciona() {
   return (
     <section
       id="como-funciona"
-      className="scroll-mt-24 flex flex-col items-center px-5 py-10 pb-20 sm:px-8 sm:py-14 sm:pb-24"
+      className="scroll-mt-24 flex flex-col items-center px-5 py-10 sm:px-8 sm:py-14"
     >
       <Reveal className="mb-12 max-w-md text-center">
         <h2 className="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[#F5F5F5] sm:text-4xl">
