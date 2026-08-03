@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import ScrollRestoration from "@/components/ScrollRestoration";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -31,6 +32,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} scroll-smooth h-full`}
     >
       <body className="min-h-full bg-[#0D0F12] font-[family-name:var(--font-inter)] text-[#F5F5F5] antialiased">
+        <ScrollRestoration />
         {children}
       </body>
     </html>

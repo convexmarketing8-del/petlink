@@ -26,13 +26,17 @@ export default function Header() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-[#22262C]/60 bg-[#0D0F12]/70 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:px-8">
-        <span className="flex items-center gap-1.5 font-[family-name:var(--font-heading)] text-lg tracking-tight text-[#F5F5F5]">
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex items-center gap-1.5 font-[family-name:var(--font-heading)] text-lg tracking-tight text-[#F5F5F5]"
+        >
           <PawPrint size={17} strokeWidth={2} className="shrink-0 text-[#FF8A3D]" />
           <span>
             <span className="font-light">Pet</span>
             <span className="font-bold">Link</span>
           </span>
-        </span>
+        </button>
 
         <div ref={menuRef} className="relative">
           <button
