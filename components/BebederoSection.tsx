@@ -1,5 +1,6 @@
 import DeviceControlCard from "./DeviceControlCard";
 import WaterDropletIcon from "./icons/WaterDropletIcon";
+import Reveal from "./Reveal";
 
 const OPTIONS = [
   { id: "10s", label: "10 segundos" },
@@ -13,7 +14,7 @@ export default function BebederoSection() {
       id="bebedero"
       className="scroll-mt-24 flex flex-col items-center px-5 py-10 sm:px-8 sm:py-14"
     >
-      <div className="mb-10 max-w-md text-center">
+      <Reveal className="mb-10 max-w-md text-center">
         <h2 className="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[#F5F5F5] sm:text-4xl">
           Bebedero automático
         </h2>
@@ -21,15 +22,17 @@ export default function BebederoSection() {
           Elegí cuánto tiempo se sirve el agua y lo hacemos{" "}
           <span className="font-medium text-[#3DC9FF]">al instante</span>.
         </p>
-      </div>
+      </Reveal>
 
-      <DeviceControlCard
-        title="Bebedero"
-        icon={<WaterDropletIcon />}
-        accent="#3DC9FF"
-        options={OPTIONS}
-        node="bebedero"
-      />
+      <Reveal delay={150}>
+        <DeviceControlCard
+          title="Bebedero"
+          icon={<WaterDropletIcon />}
+          accent="#3DC9FF"
+          options={OPTIONS}
+          node="bebedero"
+        />
+      </Reveal>
     </section>
   );
 }
