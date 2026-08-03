@@ -24,7 +24,7 @@ export default function AlimentadorSection() {
         </p>
       </Reveal>
 
-      <Reveal delay={150}>
+      <Reveal delay={150} className="flex justify-center">
         <DeviceControlCard
           title="Alimentador"
           icon={<FeederBowlIcon />}

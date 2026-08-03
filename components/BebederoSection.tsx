@@ -24,7 +24,7 @@ export default function BebederoSection() {
         </p>
       </Reveal>
 
-      <Reveal delay={150}>
+      <Reveal delay={150} className="flex justify-center">
         <DeviceControlCard
           title="Bebedero"
           icon={<WaterDropletIcon />}
