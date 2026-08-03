@@ -110,7 +110,7 @@ export default function DeviceControlCard({
 
   return (
     <div
-      className="w-full max-w-md rounded-3xl border p-6 sm:p-8"
+      className="w-full max-w-md rounded-3xl border p-5 sm:p-7"
       style={
         {
           backgroundColor: "var(--color-card)",
@@ -122,9 +122,9 @@ export default function DeviceControlCard({
         } as CSSProperties
       }
     >
-      <div className="flex items-center gap-3.5">
+      <div className="flex items-center gap-3">
         <div
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
           style={{ backgroundColor: "var(--accent-soft)", color: accent }}
         >
           {icon}
@@ -140,7 +140,7 @@ export default function DeviceControlCard({
         </div>
       </div>
 
-      <div className="mt-7 flex flex-col gap-3">
+      <div className="mt-5 flex flex-col gap-2.5">
         {options.map((option) => {
           const isActive = activeId === option.id;
           const buttonState: ButtonState = isActive ? state : "idle";
@@ -152,7 +152,7 @@ export default function DeviceControlCard({
               type="button"
               disabled={disabled}
               onClick={() => handleClick(option.id)}
-              className="group relative flex items-center justify-center gap-2.5 rounded-xl border px-5 py-3.5 text-center text-sm font-medium transition-all duration-300 ease-out enabled:hover:scale-[1.02] enabled:hover:shadow-[0_0_28px_-6px_var(--accent-glow)] enabled:active:scale-[0.97] disabled:cursor-not-allowed"
+              className="group relative flex items-center justify-center gap-2.5 rounded-xl border px-5 py-3 text-center text-sm font-medium transition-all duration-300 ease-out enabled:hover:scale-[1.02] enabled:hover:shadow-[0_0_28px_-6px_var(--accent-glow)] enabled:active:scale-[0.97] disabled:cursor-not-allowed"
               style={{
                 borderColor:
                   buttonState === "done"
