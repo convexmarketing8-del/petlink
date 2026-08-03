@@ -12,9 +12,9 @@ export default function AlimentadorSection() {
   return (
     <section
       id="alimentador"
-      className="scroll-mt-24 flex flex-col items-center px-5 pt-2 pb-10 sm:px-8 sm:pt-6 sm:pb-14"
+      className="scroll-mt-24 flex flex-col items-center px-5 pt-6 pb-10 sm:px-8 sm:pt-10 sm:pb-14"
     >
-      <Reveal className="mb-5 max-w-md text-center sm:mb-8">
+      <Reveal className="mb-7 max-w-md text-center sm:mb-9">
         <h2 className="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[#F5F5F5] sm:text-4xl">
           Alimentador automático
         </h2>

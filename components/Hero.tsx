@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 export default function Hero() {
   return (
-    <section className="flex flex-col items-center px-5 pt-24 pb-4 text-center sm:px-8 sm:pt-28 sm:pb-6">
+    <section className="flex flex-col items-center px-5 pt-24 pb-7 text-center sm:px-8 sm:pt-28 sm:pb-9">
       <Reveal className="flex flex-col items-center">
         <div className="flex items-center gap-2.5 sm:gap-3">
           <PawPrint
