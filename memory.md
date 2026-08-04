@@ -19,9 +19,15 @@ La landing es la interfaz de control de un prototipo real (alimentador
 - Firebase Realtime Database en "modo de prueba" (sin autenticación) 
   ya que es un prototipo de tesis, no producción
 
+## Decisiones tomadas (cont.)
+- La estructura de datos de Firebase NO es simétrica entre dispositivos: 
+  el alimentador (ESP32) escribe/lee en la raíz (`/ejecutar`, `/comando`, 
+  `/estado`), el bebedero (ESP8266) usa el nodo `/bebedero` (`activar`, 
+  `tiempo`, `estado`, `nivelBajo`). Ver detalle en CLAUDE.md, sección 
+  "Estructura de datos en Firebase" — esta ya es la estructura real 
+  que usa el hardware, no una propuesta.
+
 ## Pendientes / a definir
 - [ ] Crear proyecto de Firebase y generar credenciales
 - [ ] Configurar .env.local con las credenciales de Firebase
-- [ ] Confirmar con el amigo que el código de las placas ya está 
-  escuchando en la estructura de datos definida en CLAUDE.md
 - [ ] Deploy final a Vercel

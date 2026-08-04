@@ -3,9 +3,9 @@ import WaterDropletIcon from "./icons/WaterDropletIcon";
 import Reveal from "./Reveal";
 
 const OPTIONS = [
-  { id: "10s", label: "10 segundos" },
-  { id: "20s", label: "20 segundos" },
-  { id: "30s", label: "30 segundos" },
+  { id: "10s", label: "10 segundos", value: 10 },
+  { id: "20s", label: "20 segundos", value: 20 },
+  { id: "30s", label: "30 segundos", value: 30 },
 ];
 
 export default function BebederoSection() {
@@ -30,7 +30,7 @@ export default function BebederoSection() {
           icon={<WaterDropletIcon />}
           accent="#3DC9FF"
           options={OPTIONS}
-          node="bebedero"
+          kind="bebedero"
         />
       </Reveal>
     </section>

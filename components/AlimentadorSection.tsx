@@ -3,9 +3,9 @@ import FeederBowlIcon from "./icons/FeederBowlIcon";
 import Reveal from "./Reveal";
 
 const OPTIONS = [
-  { id: "porcion_chica", label: "Porción chica" },
-  { id: "porcion_mediana", label: "Porción mediana" },
-  { id: "porcion_grande", label: "Porción grande" },
+  { id: "porcion_chica", label: "Porción chica", value: "CHICA" },
+  { id: "porcion_mediana", label: "Porción mediana", value: "MEDIANA" },
+  { id: "porcion_grande", label: "Porción grande", value: "GRANDE" },
 ];
 
 export default function AlimentadorSection() {
@@ -30,7 +30,7 @@ export default function AlimentadorSection() {
           icon={<FeederBowlIcon />}
           accent="#FF8A3D"
           options={OPTIONS}
-          node="alimentador"
+          kind="alimentador"
         />
       </Reveal>
     </section>

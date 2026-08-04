@@ -1,6 +1,6 @@
 "use client";
 
-import { onValue, ref, set } from "firebase/database";
+import { onValue, ref, update } from "firebase/database";
 import {
   useEffect,
   useRef,
@@ -15,6 +15,8 @@ type ButtonState = "idle" | "sending" | "done" | "error";
 interface DeviceOption {
   id: string;
   label: string;
+  /** Valor real que espera el hardware (comando del alimentador o tiempo del bebedero) */
+  value: string | number;
 }
 
 interface DeviceControlCardProps {
@@ -22,7 +24,7 @@ interface DeviceControlCardProps {
   icon: ReactNode;
   accent: string;
   options: DeviceOption[];
-  node: "alimentador" | "bebedero";
+  kind: "alimentador" | "bebedero";
 }
 
 const TIMEOUT_MS = 18000;
@@ -34,7 +36,7 @@ export default function DeviceControlCard({
   icon,
   accent,
   options,
-  node,
+  kind,
 }: DeviceControlCardProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [state, setState] = useState<ButtonState>("idle");
@@ -60,23 +62,27 @@ export default function DeviceControlCard({
     );
   };
 
-  const handleClick = async (optionId: string) => {
+  const handleClick = async (option: DeviceOption) => {
     if (activeId) return;
 
     cleanup();
-    setActiveId(optionId);
+    setActiveId(option.id);
     setState("sending");
 
-    const deviceRef = ref(database, `/${node}`);
-    const estadoRef = ref(database, `/${node}/estado`);
+    const writePromise =
+      kind === "alimentador"
+        ? update(ref(database), { ejecutar: true, comando: option.value })
+        : update(ref(database, "/bebedero"), {
+            activar: true,
+            tiempo: option.value,
+          });
+    const watchRef =
+      kind === "alimentador"
+        ? ref(database, "/ejecutar")
+        : ref(database, "/bebedero/activar");
 
     try {
-      await set(deviceRef, {
-        accion: optionId,
-        // eslint-disable-next-line react-hooks/purity -- runs inside a click handler, not during render
-        timestamp: Date.now(),
-        estado: "pendiente",
-      });
+      await writePromise;
     } catch {
       setState("error");
       scheduleErrorReset();
@@ -91,14 +97,22 @@ export default function DeviceControlCard({
       }, TIMEOUT_MS),
     );
 
-    const unsubscribe = onValue(estadoRef, (snapshot) => {
-      if (snapshot.val() === "completado") {
+    // El hardware pone este campo en true al recibir la orden y lo vuelve a
+    // false al terminar; solo contamos "false" como completado si ya vimos
+    // el "true" de esta orden, para no confundirlo con el estado inicial.
+    let sawActive = false;
+    const unsubscribe = onValue(watchRef, (snapshot) => {
+      const val = snapshot.val();
+      if (val === true) {
+        sawActive = true;
+        return;
+      }
+      if (val === false && sawActive) {
         cleanup();
         setState("done");
 
         timersRef.current.push(
-          setTimeout(async () => {
-            await set(deviceRef, { accion: null, estado: "idle" });
+          setTimeout(() => {
             setActiveId(null);
             setState("idle");
           }, DONE_MS),
@@ -151,7 +165,7 @@ export default function DeviceControlCard({
               key={option.id}
               type="button"
               disabled={disabled}
-              onClick={() => handleClick(option.id)}
+              onClick={() => handleClick(option)}
               className="group relative flex items-center justify-center gap-2.5 rounded-xl border px-5 py-3.5 text-center text-sm font-medium transition-all duration-300 ease-out enabled:hover:scale-[1.02] enabled:hover:shadow-[0_0_28px_-6px_var(--accent-glow)] enabled:active:scale-[0.97] disabled:cursor-not-allowed"
               style={{
                 borderColor:

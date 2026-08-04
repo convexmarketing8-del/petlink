@@ -37,24 +37,42 @@ que envían comandos a Firebase, que luego leen los microcontroladores.
    orden → el dispositivo la ejecuta)
 
 ## Comportamiento de los botones
-Al presionar un botón:
-1. Escribe en Firebase Realtime Database bajo el nodo correspondiente 
-   (/alimentador o /bebedero) con la acción elegida y un timestamp
+Alimentador y bebedero usan esquemas de Firebase DIFERENTES entre sí 
+(no son simétricos) porque así los implementó el hardware real.
+
+**Alimentador (ESP32)** — trabaja en la RAÍZ de la base de datos:
+1. Al presionar un botón, escribe en la raíz `{ ejecutar: true, comando: 
+   "CHICA" | "MEDIANA" | "GRANDE" }`
 2. Muestra estado visual "Enviando..." (spinner)
-3. Escucha el campo "estado" en tiempo real — cuando el hardware 
-   confirma (estado: "completado"), muestra un check verde + 
-   "¡Listo!" por unos segundos, después vuelve al estado normal
+3. Escucha "/ejecutar" en tiempo real — el hardware lo pone en `true` al 
+   recibir la orden y de vuelta en `false` cuando termina (y escribe el 
+   resultado en "/estado", ej: "OK: CHICA"). Cuando vuelve a `false`, 
+   muestra check verde + "¡Listo!" por unos segundos, después vuelve al 
+   estado normal
+
+**Bebedero (ESP8266)** — trabaja dentro del nodo "/bebedero":
+1. Al presionar un botón, escribe en "/bebedero" `{ activar: true, 
+   tiempo: 10 | 20 | 30 }`
+2. Muestra estado visual "Enviando..." (spinner)
+3. Escucha "/bebedero/activar" en tiempo real — el hardware pone 
+   "/bebedero/estado" en "ENCENDIDO" mientras funciona, y al terminar 
+   pone "activar" de vuelta en `false` y "estado" en "APAGADO". Cuando 
+   "activar" vuelve a `false`, muestra check verde + "¡Listo!" por unos 
+   segundos, después vuelve al estado normal
+4. También existe "/bebedero/nivelBajo" (boolean, sensor de nivel bajo) 
+   pero no se usa en la interfaz por ahora
 
 Estructura de datos en Firebase:
-/alimentador
-  - accion: string ("porcion_chica" | "porcion_mediana" | "porcion_grande")
-  - timestamp: number
-  - estado: string ("pendiente" | "completado")
+/ (raíz)
+  - ejecutar: boolean
+  - comando: string ("CHICA" | "MEDIANA" | "GRANDE")
+  - estado: string (resultado del hardware, ej. "OK: CHICA")
 
 /bebedero
-  - accion: string ("10s" | "20s" | "30s")
-  - timestamp: number
-  - estado: string ("pendiente" | "completado")
+  - activar: boolean
+  - tiempo: number (10 | 20 | 30, en segundos)
+  - estado: string ("ENCENDIDO" | "APAGADO")
+  - nivelBajo: boolean (sensor aparte, no conectado a la interfaz)
 
 ## Reglas de trabajo
 - No tocar la lógica de los microcontroladores (ESP32/ESP8266) — eso 
