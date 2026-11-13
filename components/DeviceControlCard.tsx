@@ -126,7 +126,7 @@ export default function DeviceControlCard({
 
   return (
     <div
-      className="relative w-full max-w-md overflow-hidden rounded-3xl border p-6 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.8)] sm:p-8"
+      className="relative isolate w-full max-w-md transform-gpu overflow-hidden rounded-3xl border p-6 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.8)] sm:p-8"
       style={
         {
           backgroundColor: "var(--color-card)",

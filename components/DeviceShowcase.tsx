@@ -105,7 +105,7 @@ function DeviceCard({ device, delay }: { device: Device; delay: number }) {
   return (
     <Reveal delay={delay}>
       <article
-        className="group relative overflow-hidden rounded-3xl border border-[#22262C] bg-[#161A1F] p-4 transition-colors duration-300 hover:border-[color:var(--accent)] sm:p-6"
+        className="group relative isolate transform-gpu overflow-hidden rounded-3xl border border-[#22262C] bg-[#161A1F] p-4 transition-colors duration-300 hover:border-[color:var(--accent)] sm:p-6"
         style={{ "--accent": device.accent } as CSSProperties}
       >
         <div

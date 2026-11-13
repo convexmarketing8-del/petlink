@@ -89,7 +89,7 @@ export default function Contacto() {
         {ABOUT.map((item, index) => (
           <Reveal key={item.title} delay={index * 140}>
             <article
-              className="group relative h-full overflow-hidden rounded-3xl border border-[#22262C] bg-[#161A1F] p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-[color:var(--accent)] hover:shadow-[0_16px_40px_-20px_var(--accent-glow)] sm:p-8"
+              className="group relative isolate h-full transform-gpu overflow-hidden rounded-3xl border border-[#22262C] bg-[#161A1F] p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-[color:var(--accent)] hover:shadow-[0_16px_40px_-20px_var(--accent-glow)] sm:p-8"
               style={
                 {
                   "--accent": item.accent,
@@ -158,7 +158,7 @@ export default function Contacto() {
 
       {/* Contacto */}
       <Reveal className="mt-6 max-w-4xl">
-        <div className="relative overflow-hidden rounded-3xl border border-[#22262C] bg-[#161A1F] p-7 sm:p-10">
+        <div className="relative isolate transform-gpu overflow-hidden rounded-3xl border border-[#22262C] bg-[#161A1F] p-7 sm:p-10">
           <div
             aria-hidden
             className="pointer-events-none absolute -left-20 -bottom-24 h-64 w-64 rounded-full bg-[#4ADE80] opacity-15 blur-3xl"
