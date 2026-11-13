@@ -147,8 +147,8 @@ export default function DeviceControlCard({
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-24 left-1/2 h-48 w-72 -translate-x-1/2 rounded-full opacity-20 blur-3xl"
-        style={{ background: accent }}
+        className="pointer-events-none absolute -top-24 left-1/2 h-48 w-72 -translate-x-1/2 opacity-30"
+        style={{ background: `radial-gradient(closest-side, ${accent}, transparent)` }}
       />
 
       <div className="relative flex items-center gap-4">

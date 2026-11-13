@@ -106,8 +106,10 @@ export default function Contacto() {
               />
               <div
                 aria-hidden
-                className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-20 blur-3xl transition-opacity duration-300 group-hover:opacity-40"
-                style={{ background: item.accent }}
+                className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 opacity-30 transition-opacity duration-300 group-hover:opacity-50"
+                style={{
+                  background: `radial-gradient(closest-side, ${item.accent}, transparent)`,
+                }}
               />
               <span
                 aria-hidden
@@ -161,11 +163,13 @@ export default function Contacto() {
         <div className="relative isolate transform-gpu overflow-hidden rounded-3xl border border-[#22262C] bg-[#161A1F] p-7 sm:p-10">
           <div
             aria-hidden
-            className="pointer-events-none absolute -left-20 -bottom-24 h-64 w-64 rounded-full bg-[#4ADE80] opacity-15 blur-3xl"
+            className="pointer-events-none absolute -left-20 -bottom-24 h-64 w-64 opacity-20"
+            style={{ background: "radial-gradient(closest-side, #4ADE80, transparent)" }}
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#FF8A3D] opacity-15 blur-3xl"
+            className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 opacity-20"
+            style={{ background: "radial-gradient(closest-side, #FF8A3D, transparent)" }}
           />
 
           <div className="relative grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-center">
