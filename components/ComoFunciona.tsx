@@ -1,5 +1,6 @@
 import { HeartIcon, SignalIcon, TapIcon } from "./icons/StepIcons";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 import type { ComponentType } from "react";
 
 const STEPS: {
@@ -37,16 +38,14 @@ export default function ComoFunciona() {
   return (
     <section
       id="como-funciona"
-      className="scroll-mt-24 flex flex-col items-center px-5 py-10 sm:px-8 sm:py-14"
+      className="scroll-mt-24 flex flex-col items-center px-5 py-12 sm:px-8 sm:py-16"
     >
-      <Reveal className="mb-12 max-w-md text-center">
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl font-semibold text-[#F5F5F5] sm:text-4xl">
-          Cómo funciona
-        </h2>
-        <p className="mt-3 text-base font-medium text-[#F5F5F5]/80 sm:text-lg">
-          Así de simple, en tres pasos.
-        </p>
-      </Reveal>
+      <SectionHeading
+        eyebrow="Paso a paso"
+        title="Cómo funciona"
+        subtitle="Así de simple, en tres pasos."
+        accent="#3DC9FF"
+      />
 
       <div className="grid w-full max-w-4xl gap-6 sm:grid-cols-3">
         {STEPS.map((step, index) => (

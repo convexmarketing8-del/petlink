@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { label: "Alimentador", href: "#alimentador" },
   { label: "Bebedero", href: "#bebedero" },
   { label: "Cómo funciona", href: "#como-funciona" },
+  { label: "Contacto", href: "#contacto" },
 ];
 
 export default function Header() {

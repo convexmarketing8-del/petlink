@@ -21,6 +21,7 @@ interface DeviceOption {
 
 interface DeviceControlCardProps {
   title: string;
+  subtitle?: string;
   icon: ReactNode;
   accent: string;
   options: DeviceOption[];
@@ -33,6 +34,7 @@ const ERROR_RESET_MS = 3000;
 
 export default function DeviceControlCard({
   title,
+  subtitle,
   icon,
   accent,
   options,
@@ -124,7 +126,7 @@ export default function DeviceControlCard({
 
   return (
     <div
-      className="w-full max-w-md rounded-3xl border p-6 sm:p-8"
+      className="relative w-full max-w-md overflow-hidden rounded-3xl border p-6 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.8)] sm:p-8"
       style={
         {
           backgroundColor: "var(--color-card)",
@@ -136,25 +138,43 @@ export default function DeviceControlCard({
         } as CSSProperties
       }
     >
-      <div className="flex items-center gap-3.5">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background: `linear-gradient(to right, transparent, ${accent}, transparent)`,
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 left-1/2 h-48 w-72 -translate-x-1/2 rounded-full opacity-20 blur-3xl"
+        style={{ background: accent }}
+      />
+
+      <div className="relative flex items-center gap-4">
         <div
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
-          style={{ backgroundColor: "var(--accent-soft)", color: accent }}
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border"
+          style={{
+            backgroundColor: "var(--accent-soft)",
+            borderColor: "var(--accent-border)",
+            color: accent,
+          }}
         >
           {icon}
         </div>
-        <div>
+        <div className="min-w-0 flex-1">
           <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-[#F5F5F5]">
             {title}
           </h3>
-          <div className="mt-0.5 flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#4ADE80]" />
-            <span className="text-xs text-[#8A8F98]">Conectado</span>
-          </div>
+          {subtitle && <p className="mt-0.5 text-sm text-[#8A8F98]">{subtitle}</p>}
         </div>
+        <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-[#4ADE80]/25 bg-[#4ADE80]/10 px-2.5 py-1 text-[11px] font-medium text-[#4ADE80]">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#4ADE80]" />
+          Online
+        </span>
       </div>
 
-      <div className="mt-6 flex flex-col gap-3">
+      <div className="relative mt-7 flex flex-col gap-3">
         {options.map((option) => {
           const isActive = activeId === option.id;
           const buttonState: ButtonState = isActive ? state : "idle";
@@ -166,7 +186,7 @@ export default function DeviceControlCard({
               type="button"
               disabled={disabled}
               onClick={() => handleClick(option)}
-              className="group relative flex items-center justify-center gap-2.5 rounded-xl border px-5 py-3.5 text-center text-sm font-medium transition-all duration-300 ease-out enabled:hover:scale-[1.02] enabled:hover:shadow-[0_0_28px_-6px_var(--accent-glow)] enabled:active:scale-[0.97] disabled:cursor-not-allowed"
+              className="group relative flex items-center justify-center gap-2.5 rounded-2xl border px-5 py-4 text-center text-sm font-semibold transition-all duration-300 ease-out enabled:hover:scale-[1.02] enabled:hover:shadow-[0_0_28px_-6px_var(--accent-glow)] enabled:active:scale-[0.97] disabled:cursor-not-allowed"
               style={{
                 borderColor:
                   buttonState === "done"

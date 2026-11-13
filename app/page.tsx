@@ -1,9 +1,11 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import BackgroundLayer from "@/components/BackgroundLayer";
-import AlimentadorSection from "@/components/AlimentadorSection";
-import BebederoSection from "@/components/BebederoSection";
+import DeviceShowcase from "@/components/DeviceShowcase";
+import ControlPanel from "@/components/ControlPanel";
 import ComoFunciona from "@/components/ComoFunciona";
+import Contacto from "@/components/Contacto";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -12,10 +14,12 @@ export default function Home() {
       <Header />
       <main className="flex flex-col">
         <Hero />
-        <AlimentadorSection />
-        <BebederoSection />
+        <DeviceShowcase />
+        <ControlPanel />
         <ComoFunciona />
+        <Contacto />
       </main>
+      <Footer />
     </div>
   );
 }

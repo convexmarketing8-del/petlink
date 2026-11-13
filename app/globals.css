@@ -28,6 +28,84 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes petlink-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.petlink-float {
+  animation: petlink-float 5s ease-in-out infinite;
+}
+
+@keyframes petlink-kenburns {
+  0%, 100% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.025) translate(-0.4%, -0.5%); }
+}
+.petlink-kenburns {
+  animation: petlink-kenburns 14s ease-in-out infinite;
+}
+
+@keyframes petlink-shine {
+  0%, 55% { transform: translateX(-130%) skewX(-18deg); }
+  100% { transform: translateX(230%) skewX(-18deg); }
+}
+.petlink-shine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 35%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent);
+  animation: petlink-shine 7s ease-in-out infinite;
+}
+
+@keyframes petlink-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(18vw, 14vh) scale(1.15); }
+}
+@keyframes petlink-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-16vw, -12vh) scale(1.2); }
+}
+@keyframes petlink-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(14vw, -10vh) scale(0.9); }
+}
+.petlink-drift-a { animation: petlink-drift-a 26s ease-in-out infinite; }
+.petlink-drift-b { animation: petlink-drift-b 32s ease-in-out infinite; }
+.petlink-drift-c { animation: petlink-drift-c 38s ease-in-out infinite; }
+
+@keyframes petlink-paw-rise {
+  0% { transform: translate(0, 0); opacity: 0; }
+  12% { opacity: 0.3; }
+  50% { transform: translate(18px, -55vh); }
+  88% { opacity: 0.3; }
+  100% { transform: translate(0, -110vh); opacity: 0; }
+}
+.petlink-paw {
+  opacity: 0;
+  animation: petlink-paw-rise ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petlink-float,
+  .petlink-kenburns,
+  .petlink-shine::before,
+  .petlink-drift-a,
+  .petlink-drift-b,
+  .petlink-drift-c {
+    animation: none;
+  }
+  .petlink-paw {
+    display: none;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
